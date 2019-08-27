@@ -10,6 +10,10 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>eurekaserver</module>
+        <module>configserver</module>
+        <module>order</module>
+        <module>menu</module>
+        <module>client</module>
     </modules>
 
     <parent>
@@ -22,6 +26,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
     <!--引入springCloud的依赖，管理SpringCloud生态各个组件-->
