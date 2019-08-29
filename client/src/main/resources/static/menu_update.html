@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
 </head>
 <body>
 <div class="layui-container" style="margin-top: 50px;">
@@ -50,7 +50,7 @@
         </form>
     </div>
 </div>
-<script src="/layui/layui.js" charset="utf-8"></script>
+<script th:src="@{/layui/layui.js}" charset="utf-8"></script>
 <script>
     layui.use(['form', 'element'], function(){
         var form = layui.form;

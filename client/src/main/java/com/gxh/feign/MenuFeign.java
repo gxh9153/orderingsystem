@@ -25,11 +25,11 @@ public interface MenuFeign {
     public List<Type> findTypes();
 
     @PostMapping("/menu/save")
-    public void insert(Menu menu);
+    public void insert(@RequestBody Menu menu);
 
     @RequestMapping("/menu/findById/{id}")
     public Menu findById(@PathVariable("id") int id);
 
     @PostMapping("/menu/update")
-    public void update(Menu menu);
+    public void update(@RequestBody Menu menu);
 }

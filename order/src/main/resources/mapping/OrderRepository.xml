@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxh.repository.OrderRepository">
+
+    <resultMap id="orderMap" type="Order">
+        <id column="id" property="id"></id>
+        <result column="date" property="date"></result>
+        <result column="state" property="state"></result>
+        <association property="menu" javaType="Menu">
+            <id column="id" property="id"></id>
+            <result column="name" property="name"></result>
+            <result column="price" property="price"></result>
+            <result column="flavor" property="flavor"></result>
+        </association>
+        <association property="user" javaType="User">
+            <id column="id" property="id"></id>
+            <result column="nickname" property="nickname"></result>
+            <result column="telephone" property="telephone"></result>
+            <result column="address" property="address"></result>
+        </association>
+    </resultMap>
+
+    <insert id="save" parameterType="Order">
+    insert into t_order(uid,mid,date,state) values (#{user.id},#{menu.id},#{date},0);
+  </insert>
+
+    <select id="findAllByUid" parameterType="int" resultMap="orderMap">
+    select m.id mid,m.name,m.price,m.flavor,o.id oid,o.date,o.state from t_order o,t_menu m where o.mid = m.id and o.uid = #{param1} order by oid limit #{param2},#{param3}
+  </select>
+
+    <select id="findAllByState" parameterType="int" resultMap="orderMap">
+        select m.id mid,m.name,m.price,m.flavor,o.id id,o.date,u.id uid,u.nickname,u.telephone,u.address from t_order o,t_menu m,t_user u where o.mid = m.id and o.uid = u.id and o.state =0 order by id limit #{param1},#{param2}
+    </select>
+
+    <select id="countByUid" parameterType="int" resultType="int">
+    select count(*) from t_order where uid =#{uid};
+  </select>
+
+    <select id="count" resultType="int">
+    select count(*) from t_order where state = 0;
+  </select>
+
+    <update id="update" parameterType="int">
+    update t_order set state = 1 where id = #{id};
+  </update>
+</mapper>

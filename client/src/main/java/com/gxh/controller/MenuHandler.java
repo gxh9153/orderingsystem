@@ -16,6 +16,11 @@ public class MenuHandler {
     @Autowired
     private MenuFeign menuFeign;
 
+    @GetMapping("/redirect/{location}")
+    public String redirect(@PathVariable("location") String location){
+        return location;
+    }
+
     @GetMapping("/findAll")
     @ResponseBody
     public MenuDTO findAll(@RequestParam("page") int page,
@@ -27,7 +32,7 @@ public class MenuHandler {
     @GetMapping("/delete/{id}")
     public String deleteById(@PathVariable("id") int id){
         menuFeign.deleteById(id);
-        return "redirect:/index.html";
+        return "redirect:/menu/redirect/menu_manage.html";
     }
 
     @GetMapping("/findTypes")
@@ -41,7 +46,7 @@ public class MenuHandler {
     @PostMapping("/save")
     public String insert(Menu menu){
         menuFeign.insert(menu);
-        return "redirect:/index.html";
+        return "redirect:/menu/redirect/menu_manage.html";
     }
 
     @GetMapping("/findById/{id}")
@@ -56,6 +61,6 @@ public class MenuHandler {
     @PostMapping("/update")
     public String update(Menu menu){
         menuFeign.update(menu);
-        return "redirect:/index.html";
+        return "redirect:/menu/redirect/menu_manage.html";
     }
 }
